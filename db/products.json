@@ -1,0 +1,58 @@
+[
+  
+  {
+    "title": "Producto 6",
+    "price": "1000",
+    "code": "6",
+    "stock": "1",
+    "category": "Product example",
+    "description": "Producto agregado desde html",
+    "status": "true",
+    "thumbnail": "C:\\fakepath\\FB_IMG_1683489565616.jpg",
+    "id": 6
+  },
+  {
+    "title": "Producto 7",
+    "price": "1000",
+    "code": "7",
+    "stock": "1",
+    "category": "Product example",
+    "description": "Producto agregado desde html",
+    "status": "true",
+    "thumbnail": "C:\\fakepath\\FB_IMG_1683489565616.jpg",
+    "id": 7
+  },
+  {
+    "title": "Producto 8",
+    "price": "1000",
+    "code": "8",
+    "stock": "1",
+    "category": "Product example",
+    "description": "Producto agregado desde html",
+    "status": "true",
+    "thumbnail": "C:\\fakepath\\FB_IMG_1683489565616.jpg",
+    "id": 8
+  },
+  {
+    "title": "Producto 9",
+    "price": "1000",
+    "code": "9",
+    "stock": "1",
+    "category": "Product example",
+    "description": "Producto agregado desde html",
+    "status": "true",
+    "thumbnail": "C:\\fakepath\\FB_IMG_1683489565616.jpg",
+    "id": 9
+  },
+  {
+    "title": "Producto 10",
+    "price": "1000",
+    "code": "10",
+    "stock": "1",
+    "category": "Product example",
+    "description": "Producto agregado desde html",
+    "status": "true",
+    "thumbnail": "C:\\fakepath\\FB_IMG_1683489565616.jpg",
+    "id": 10
+  }
+]
