@@ -1,0 +1,33 @@
+<h1>Nuestros productos desde la base de datos!</h1>
+<div>
+    {{#if productsList.length}}
+      <section class="productsContainer">
+        {{#each productsList}}
+          <div class="productsCard">
+            <h3>Nombre:{{title}}</h3>
+            <h4>Descripcion:{{description}}</h4>
+            <h4>Precio:{{price}}</h4>
+            <img src={{thumbnail}} />
+            <div class="buttons">
+              <button><a href="">mas detalles</a></button>
+              <button onclick="addProduct({{_id}})" id="addButton" class="plusButtond">agregar al carrito</button>
+            </div>
+          </div>
+        {{/each}}
+      </section>
+    {{else}}
+      <h3>Error cargando los productos, por favor intente recargar la pagina 🔃</h3>
+    {{/if}}
+    <center>
+      {{#if hasPrevPage}}
+        <a href={{prevLink}}><button>Anterior</button></a>
+      {{/if}}
+
+      {{#if hasNextPage}}
+        <a href={{nextLink}}><button>Siguiente</button></a>
+      {{/if}}
+    </center>
+</div>
+
+<script src="/static/js/products.js"></script>
+<script src=" https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.all.min.js "></script>

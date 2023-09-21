@@ -35,7 +35,7 @@ httpServer.listen(PORT, () => {
 })
 
 //Configuramos los routes, los cuales estaran en /api/products y /api/carts dentro de routes/index
-app.use('/api', routers)
+
 //Configuramos los routes de mongo
 app.use('/api', routersMongo)
 //Configuramos los routes de las views
@@ -72,5 +72,17 @@ io.on('connection', async socket => {
         await chatManager.addMessages(data)
         const newMessageList = await chatManager.getAllMessages()
         io.emit("messages", newMessageList)
-    });
+    })
+    socket.on("cart", async id => {
+        const cart = await cartManager.getById(id)
+        const dataErrorUno = {status: 'error', message:'Do not exist'}
+        const dataErrorDos = {status: 'error', message:'Wrong id format'}
+        if(cart.message === 'Do not exist'){
+            socket.emit('cart', dataErrorUno)
+        }
+        if(cart.message === 'Wrong id format'){
+            socket.emit('cart', dataErrorDos)
+        }
+        socket.emit("cart", cart)
+    })
 })

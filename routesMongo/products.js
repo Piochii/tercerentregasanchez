@@ -1,6 +1,5 @@
 const {Router} = require('express')
 const productManager = require('../dao/mongoDb/products')
-const { userModel } = require('../dao/mongoDb/model/users')
 const uploader = require('../utils')
 
 const router = Router()
