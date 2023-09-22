@@ -1,4 +1,7 @@
+const { Types } = require('mongoose')
 const cartsModel = require('./model/cart')
+const productsModel = require('./model/products')
+
 
 class CartManagerMongo {
   createCart = async () => {
@@ -24,12 +27,15 @@ class CartManagerMongo {
   }
   getById = async (id) => {
     try {
+      if(!Types.ObjectId.isValid(id)){
+        return {status: 'error', message:'Wrong id format'}
+      }
       const cart = await cartsModel
         .findOne({ _id: id })
         .populate("products.product")
         .lean()
       if (!cart) {
-        throw new Error(`Does not exist.`)
+        return {status: 'error', message: 'Do not exist'}
       } else {
         return cart
       }
@@ -59,25 +65,29 @@ class CartManagerMongo {
       console.log(`Error adding product to cart: ${error.message}`)
     }
   }
+  //updateCartProduct
+  updateCartProduct = async (cid, pid, quantity) => {
+    try {
+        const cart = await cartsModel.findOne({_id: cid, "products.product": pid})
+        if (cart == null ) {
+          throw new Error(`Does not exist.`)
+        }
+        const newCart = await cartsModel.findOneAndUpdate(
+          { _id: cid, "products.product": pid },
+          { $set: {"products.$.quantity": quantity} },
+          { new: true }
+          )
+          return newCart
+      } catch (error) {
+        console.log(`Error looking cart or product whit that id: ${error.message}`)
+    }
+  }
   deleteProduct = async (cid, pid) => {
     try {
-      const cart = await this.getById(cid)
-      const quantity = cart.products.find(item => item.product._id).quantity
-      if (quantity > 1) {
-        const cart = await cartsModel.findOneAndUpdate(
-          { _id: cid, "products.product": pid },
-          { $set: { "products.$.quantity": quantity - 1 } },
-          { new: true }
-        )
-        return cart
-      } else {
-        const cart = await cartsModel.findOneAndUpdate(
-          { _id: cid },
-          { $pull: { "products": { "product": pid } } },
-          { new: true }
-        )
-        return cart;
-      }
+      return await cartsModel.findOneAndUpdate(
+        {_id: cid},
+        {$pull: {products: {product: pid}}},
+        {new: true})
     } catch (error) {
       console.log(`Error deleting product from cart: ${error.message}`)
     }
